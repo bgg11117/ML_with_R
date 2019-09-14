@@ -1,0 +1,13 @@
+credit <- read.csv('credit.csv')
+library(caret)
+library(lattice)
+library(ggplot2)
+library(C50)
+library(plyr)
+modelLookup('C5.0')
+
+library(ipred)
+set.seed(300)
+mybag <- bagging (default~., data =credit , nbagg=25)
+credit_pred <- predict(mybag,credit)
+table(credit_pred,credit$default)
